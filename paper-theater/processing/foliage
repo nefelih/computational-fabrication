@@ -1,0 +1,127 @@
+import processing.pdf.*;
+import processing.svg.*;
+import Turtle.*;
+
+Turtle t; 
+ 
+void setup() {
+  size(1500, 1000);
+  background(255);
+  stroke(0);
+  t = new Turtle(this);
+  noLoop();
+  noFill();
+  noSmooth();
+}
+
+void draw () {
+
+
+  border();
+  grass();
+  tree();
+  innerBorder();
+
+
+}
+
+void tree(){
+  bezier(1350, 90, 1300, 100, 1270, 130, 1230, 170);
+  bezier(1230, 170, 1200, 160, 1150, 150, 1100, 220);
+  bezier(1100, 220, 1070, 200, 1000, 210, 990, 230);
+  bezier(990, 230, 975, 240, 975, 260, 990, 270);
+  bezier(990, 270, 992, 340, 1050, 335, 1070, 340);
+  bezier(1070, 340, 1100, 400, 1250, 410, 1300, 370);
+  bezier(1300, 370, 1310, 400, 1320, 420, 1315, 520);
+  line(1315, 520, 1350, 370);
+  bezier(1350, 370, 1390, 400, 1400, 420, 1410, 350);
+  
+}
+
+void grass(){
+  
+  //left grass
+  bezier(90, 870, 120, 865, 130, 680, 160, 760);
+  bezier(160, 760, 180, 740, 150, 700, 132, 670);
+  bezier(132, 670, 132, 650, 150, 600, 180, 660);
+  bezier(180, 660, 170, 650, 150, 660, 180, 700);
+  bezier(180, 700, 190, 730, 210, 750, 190, 800);
+  bezier(190, 800, 192, 850, 235, 840, 240, 850);
+  bezier(240, 850, 220, 840, 220, 700, 270, 670);
+  bezier(270, 670, 260, 700, 250, 800, 290, 870);
+  bezier(290, 870, 320, 800, 310, 770, 290, 750);
+  bezier(290, 750, 300, 760, 330, 800, 315, 850);
+  bezier(315, 850, 317, 900, 350, 870, 370, 830);
+  bezier(370, 830, 380, 780, 400, 780, 420, 800);
+  bezier(420, 800, 390, 805, 400, 840, 430, 860);
+  bezier(430, 860, 440, 870, 460, 800, 480, 790);
+  bezier(480, 790, 485, 810, 495, 820, 520, 830);
+  
+  
+  //right grass
+  bezier(1195, 790, 1190, 780, 1140, 640, 1000, 600);
+  bezier(1090, 800, 1110, 750, 1110, 700, 1000, 600);
+  bezier(1020, 800, 1025, 790, 1037, 785, 1040, 760);
+  bezier(1040, 760, 1043, 790, 1047, 800, 1051, 805);
+  
+  
+  bezier(520, 830, 700, 840, 900, 700, 1020, 800);
+  bezier(1051, 805, 1060, 810, 1075, 807, 1090, 800);
+  bezier(1195, 790, 1280, 830, 1350, 805, 1410, 800);
+  
+}
+
+
+void innerBorder(){
+  
+    line(90, 90, 1350, 90);
+    line(1410, 350, 1410, 800);
+    
+
+    line(90, 600, 90, 90); 
+    
+    line(90,90, 90, 870);
+    
+}
+
+
+void border(){
+  
+  //outer edge
+  line(22, 18, 1478, 18);
+  line(1482, 22, 1482, 978);
+  line(1478, 982, 22, 982);
+  line(18, 978, 18, 22);
+  
+  //joining lines
+  line(22, 18, 70, 70);
+  line(18, 22, 70, 70);
+  
+  line(1482, 22, 1432, 70);
+  line(1478, 18, 1432, 70);
+  
+  line(1482, 978, 1432, 932);
+  line(1478, 982, 1432, 932);
+  
+  line(22, 982, 70, 932);
+  line(18, 978, 70, 932);
+  
+}
+
+
+void keyPressed() { 
+  // press 's' to save a pdf of your drawing
+  if (key == 's') {
+    String fileName = "drawing" + getDateString() + ".svg";
+    beginRecord(SVG, fileName);
+    draw();
+    endRecord();
+    println("Saved to file: " + fileName);
+  }
+} 
+
+String getDateString() {
+  String time = str(hour()) + "_" + str(minute()) + "_" + str(second());
+  String date = str(year()) + "_" + str(month()) + "_" + str(day());
+  return date + "-" + time;
+}
