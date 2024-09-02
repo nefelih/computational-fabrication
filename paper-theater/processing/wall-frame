@@ -1,0 +1,72 @@
+import processing.pdf.*;
+import processing.svg.*;
+import Turtle.*;
+
+Turtle t; 
+ 
+void setup() {
+  size(1500, 1000);
+  background(255);
+  stroke(0);
+  strokeJoin(MITER);
+
+  t = new Turtle(this);
+  noLoop();
+  noSmooth();
+}
+
+void draw () {
+
+  border();
+  innerBorder();
+  
+}
+
+void border(){
+  
+  //outer edge
+  line(22, 18, 1478, 18);
+  line(1482, 22, 1482, 978);
+  line(1478, 982, 22, 982);
+  line(18, 978, 18, 22);
+  
+  //joining lines
+  line(22, 18, 70, 70);
+  line(18, 22, 70, 70);
+  
+  line(1482, 22, 1432, 70);
+  line(1478, 18, 1432, 70);
+  
+  line(1482, 978, 1432, 932);
+  line(1478, 982, 1432, 932);
+  
+  line(22, 982, 70, 932);
+  line(18, 978, 70, 932);
+  
+}
+
+void innerBorder(){
+ 
+  line(90, 90, 1410, 90); //top
+  line(1410, 90, 1410, 700); //right
+  line(1410, 700, 90, 700); //bottom
+  line(90, 700, 90, 90); //left
+ 
+}
+
+void keyPressed() { 
+  // press 's' to save a pdf of your drawing
+  if (key == 's') {
+    String fileName = "drawing" + getDateString() + ".svg";
+    beginRecord(SVG, fileName);
+    draw();
+    endRecord();
+    println("Saved to file: " + fileName);
+  }
+} 
+
+String getDateString() {
+  String time = str(hour()) + "_" + str(minute()) + "_" + str(second());
+  String date = str(year()) + "_" + str(month()) + "_" + str(day());
+  return date + "-" + time;
+}
